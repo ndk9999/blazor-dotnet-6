@@ -13,5 +13,11 @@ namespace BlazorFullStackCrud.Client.Services.SuperHeroService
         Task GetComicsAsync();
 
         Task<SuperHero> GetHeroAsync(int id);
+
+        Task CreateHero(SuperHero hero);
+
+        Task UpdateHero(SuperHero hero);
+
+        Task DeleteHero(int id);
     }
 }
