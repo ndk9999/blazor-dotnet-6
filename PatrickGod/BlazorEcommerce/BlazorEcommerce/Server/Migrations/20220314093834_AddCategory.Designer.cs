@@ -3,6 +3,7 @@ using BlazorEcommerce.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorEcommerce.Server.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20220314093834_AddCategory")]
+    partial class AddCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +58,7 @@ namespace BlazorEcommerce.Server.Migrations
                         {
                             Id = 3,
                             Name = "Databases",
-                            Url = "databases"
+                            Url = "database"
                         });
                 });
 
@@ -134,69 +136,6 @@ namespace BlazorEcommerce.Server.Migrations
                             ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-3988-9",
                             Price = 29.99m,
                             Title = "JavaScript Data Structures and Algorithms"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 3,
-                            Description = "Write optimized queries. This book helps you write queries that perform fast and deliver results on time. You will learn that query optimization is not a dark art practiced by a small, secretive cabal of sorcerers. Any motivated professional can learn to write efficient queries from the get-go and capably optimize existing queries. You will learn to look at the process of writing a query from the database engine’s point of view, and know how to think like the database optimizer.",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-6885-8",
-                            Price = 36.99m,
-                            Title = "PostgreSQL Query Optimization"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 3,
-                            Description = "Use this fast and complete guide to optimize the performance of MongoDB databases and the applications that depend on them. You will be able to turbo-charge the performance of your MongoDB applications to provide a better experience for your users, reduce your running costs, and avoid application growing pains. MongoDB is the world’s most popular document database and the foundation for thousands of mission-critical applications.",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-6879-7",
-                            Price = 29.99m,
-                            Title = "MongoDB Performance Tuning"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 2,
-                            Description = "Agile Visualization with Pharo focuses on the Roassal visualization engine and first presents the basic and necessary tools to visualize data, including an introduction to the Pharo programming language. Once you’ve grasped the basics, you’ll learn all about the development environment offered by Roassal. The book provides numerous ready-to-use examples.",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-7161-2",
-                            Price = 26.99m,
-                            Title = "Agile Visualization with Pharo"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 2,
-                            Description = "Programming Algorithms in Lisp shows real-world engineering considerations and constraints that influence the programs that use these algorithms. It includes practical use cases of the applications of the algorithms to a variety of real-world problems.",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-6428-7",
-                            Price = 22.99m,
-                            Title = "Programming Algorithms in Lisp"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 1,
-                            Description = "Learn to leverage the power of Svelte to produce web applications that are efficient and fast. This project-oriented book simplifies creating sites using Svelte from start to finish, with little more than a text editor and familiar languages such as HTML, CSS, and JavaScript. It equips you with a starting toolset that you can use to develop future projects, incorporate into your existing workflow, and allow you to take your websites to the next level.",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-7374-6",
-                            Price = 35.99m,
-                            Title = "Practical Svelte"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 1,
-                            Description = "Quickly discover solutions to common problems, best practices you can follow, and everything jQuery has to offer. Using a problem-solution approach, this book begins with small initial problems that developers typically face while working with jQuery, and gradually goes deeper to explore more complex problems. The solutions include illustrations and clear, concise explanations of the code.",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-7304-3",
-                            Price = 15.99m,
-                            Title = "jQuery Recipes"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CategoryId = 1,
-                            Description = "Make your websites more dynamic by adding a feedback form, creating a private area where members can upload images that are automatically resized, or storing all your content in a database. David Powers has updated his definitive book to incorporate the latest techniques and changes to PHP with the arrival of PHP 8. New features include named attributes, constructor property promotion, the stricter and more concise match expression, union types, and more.​",
-                            ImageUrl = "https://media.springernature.com/w306/springer-static/cover-hires/book/978-1-4842-7141-4",
-                            Price = 39.99m,
-                            Title = "PHP 8 Solutions"
                         });
                 });
 

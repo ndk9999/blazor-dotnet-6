@@ -6,6 +6,8 @@ public interface IProductService
 
 	Task<ServiceResponse<Product>> GetProductByIdAsync(int productId);
 
+	Task<ServiceResponse<List<Product>>> GetProductsByCategoryAsync(string category);
+
 	Task AddProductAsync(Product product);
 
 	Task UpdateProductAsync(Product product);

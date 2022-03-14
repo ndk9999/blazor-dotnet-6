@@ -27,6 +27,14 @@ public class ProductService : IProductService
 			: ServiceResponse<Product>.Ok(product);
 	}
 
+	public async Task<ServiceResponse<List<Product>>> GetProductsByCategoryAsync(string category)
+	{
+		return new ServiceResponse<List<Product>>()
+		{
+			Data = await _context.Products.Where(p => p.Category.Url == category).ToListAsync()
+		};
+	}
+
 	public Task AddProductAsync(Product product)
 	{
 		throw new NotImplementedException();

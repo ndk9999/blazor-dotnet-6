@@ -1,5 +1,19 @@
 ﻿@page "/"
+@page "/{categorySlug}"
+
+@inject IProductService _productService
 
 <PageTitle>Product Catalog</PageTitle>
 
 <ProductList />
+
+@code
+{
+	[Parameter]
+	public string CategorySlug { get; set; } = null;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await _productService.GetProductsAsync(CategorySlug);
+	}
+}
