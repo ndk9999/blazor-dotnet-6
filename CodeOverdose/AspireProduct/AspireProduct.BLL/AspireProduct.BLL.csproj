@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspireProduct.Core\AspireProduct.Core.csproj" />
+    <ProjectReference Include="..\AspireProduct.DAL\AspireProduct.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

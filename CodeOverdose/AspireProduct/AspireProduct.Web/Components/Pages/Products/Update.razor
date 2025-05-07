@@ -1,0 +1,51 @@
+﻿@page "/products/update/{id:int}"
+
+<h3>Update Product</h3>
+
+<EditForm Model="ProductModel" OnValidSubmit="SubmitProduct" FormName="update-product-form">
+	<div class="container-fluid">
+		@if (ErrorMessage != null)
+		{
+			<div class="alert alert-danger">
+				@ErrorMessage
+			</div>
+		}
+		
+		<input type="hidden" @bind-value="ProductModel.Id" />
+
+		<div class="row mb-3">
+			<div class="col-md-6">
+				<label>Product Name</label>
+				<InputText @bind-Value="ProductModel.Name" class="form-control" />
+				<ValidationMessage For="@(() => ProductModel.Name)" />
+			</div>
+			<div class="col-md-3">
+				<label>Price</label>
+				<InputNumber @bind-Value="ProductModel.Price" class="form-control" />
+				<ValidationMessage For="@(() => ProductModel.Price)" />
+			</div>
+			<div class="col-md-3">
+				<label>Quantity</label>
+				<InputNumber @bind-Value="ProductModel.Quantity" class="form-control" />
+				<ValidationMessage For="@(() => ProductModel.Quantity)" />
+			</div>
+		</div>
+		
+		<div class="row mb-3">
+			<div class="col-12">
+				<label>Description</label>
+				<InputTextArea @bind-Value="ProductModel.Description" class="form-control" rows="5" />
+				<ValidationMessage For="@(() => ProductModel.Description)" />
+			</div>
+		</div>
+		
+		<div class="text-center">
+			<a class="btn btn-secondary" title="Cancel and go back" href="/products">
+				Cancel
+			</a>
+			<button type="submit" class="btn btn-primary" title="Update product">
+				Save
+			</button>
+		</div>
+	</div>
+</EditForm>
