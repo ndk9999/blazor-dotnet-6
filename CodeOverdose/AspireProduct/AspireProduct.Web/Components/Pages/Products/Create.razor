@@ -6,10 +6,10 @@
 	<div class="container-fluid">
 		<ValidationSummary Model="ProductModel"></ValidationSummary>
 
-		@if (ErrorMessage != null)
+		@if (_errorMessage != null)
 		{
 			<div class="alert alert-danger">
-				@ErrorMessage
+				@_errorMessage
 			</div>
 		}
 

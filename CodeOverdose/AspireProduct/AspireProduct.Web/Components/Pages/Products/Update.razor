@@ -4,10 +4,10 @@
 
 <EditForm Model="ProductModel" OnValidSubmit="SubmitProduct" FormName="update-product-form">
 	<div class="container-fluid">
-		@if (ErrorMessage != null)
+		@if (_errorMessage != null)
 		{
 			<div class="alert alert-danger">
-				@ErrorMessage
+				@_errorMessage
 			</div>
 		}
 		

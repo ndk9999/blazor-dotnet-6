@@ -13,10 +13,10 @@ public partial class Create
 
 	[Inject] public NavigationManager NavigationManager { get; set; }
 
-	public string ErrorMessage { get; set; }
-
 	[SupplyParameterFromForm]
 	public Product ProductModel { get; set; }
+
+	private string _errorMessage;
 
 	protected override Task OnInitializedAsync()
 	{
@@ -36,7 +36,7 @@ public partial class Create
 		else
 		{
 			ToastService.ShowError(apiResponse.ErrorMessage);
-			ErrorMessage = apiResponse.ErrorMessage;
+			_errorMessage = apiResponse.ErrorMessage;
 		}
 	}
 }

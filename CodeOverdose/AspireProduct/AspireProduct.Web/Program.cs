@@ -1,6 +1,7 @@
 using AspireProduct.Web.Components;
 using AspireProduct.Web.Services;
 using Blazored.Toast;
+using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,10 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddOutputCache();
 builder.Services.AddBlazoredToast();
+builder.Services.AddAuthentication();
+builder.Services.AddCascadingAuthenticationState();
+
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 builder.Services.AddHttpClient<GenericApiClient>(client =>
     {
@@ -31,12 +36,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAntiforgery();
-
 app.UseOutputCache();
-
 app.MapStaticAssets();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

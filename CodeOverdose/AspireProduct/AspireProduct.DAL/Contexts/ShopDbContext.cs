@@ -108,7 +108,37 @@ public sealed class ShopDbContext : DbContext
 					CreatedAt = DateTime.UtcNow
 				}
 			});
+
+		modelBuilder.Entity<Account>()
+			.HasData(new Account[]
+			{
+				new() {Id = 1, Username = "Admin", Password = "Admin"},
+				new() {Id = 2, Username = "User", Password = "User"}
+			});
+
+		modelBuilder.Entity<JobRole>()
+			.HasData(new JobRole[]
+			{
+				new() {Id = 1, Name = "Admin"},
+				new() {Id = 2, Name = "User"}
+			});
+
+		modelBuilder.Entity<AccountRole>()
+			.HasData(new AccountRole[]
+			{
+				new() {Id = 1, AccountId = 1, RoleId = 1},
+				new() {Id = 2, AccountId = 1, RoleId = 2},
+				new() {Id = 3, AccountId = 2, RoleId = 2}
+			});
 	}
 
 	public DbSet<Product> Products { get; set; }
+
+	public DbSet<Account> Accounts { get; set; }
+
+	public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+	public DbSet<JobRole> JobRoles { get; set; }
+
+	public DbSet<AccountRole> AccountRoles { get; set; }
 }

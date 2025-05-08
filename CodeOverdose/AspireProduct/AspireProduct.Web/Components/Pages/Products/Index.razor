@@ -1,4 +1,5 @@
 ﻿@page "/products"
+@attribute [Authorize]
 
 <div class="row">
 	<div class="col-6">
@@ -11,13 +12,13 @@
 	</div>
 </div>
 
-@if (ErrorMessage != null)
+@if (_errorMessage != null)
 {
 	<div class="alert alert-danger">
-		@ErrorMessage
+		@_errorMessage
 	</div>
 }
-else if (Products == null)
+else if (_products == null)
 {
 	<p>Loading ...</p>
 }
@@ -35,7 +36,7 @@ else
 		</tr>
 		</thead>
 		<tbody>
-		@foreach (var p in Products)
+		@foreach (var p in _products)
 		{
 			<tr>
 				<td>@p.Id</td>
@@ -48,29 +49,33 @@ else
 					   href="/products/update/@p.Id">
 						Update
 					</a>
-					<button class="btn btn-danger" 
-					        title="Delete product @p.Name" 
-					        @onclick="() => ShowDeleteConfirmation(p)">
-						Delete
-					</button>
+					<AuthorizeView Roles="Admin">
+						<Authorized>
+							<button class="btn btn-danger" 
+							        title="Delete product @p.Name" 
+							        @onclick="() => ShowDeleteConfirmation(p)">
+								Delete
+							</button>
+						</Authorized>
+					</AuthorizeView>
 				</td>
 			</tr>
 		}
 		</tbody>
 	</table>
 
-	<ModalDialog @ref="ConfirmDeleteModal">
+	<ModalDialog @ref="_confirmDeleteModal">
 		<Title>Confirm Delete</Title>
 		
 		<Body>
-			Do you really want to delete the product #<strong>@ProductToDelete?.Id @ProductToDelete?.Name</strong>?
+			Do you really want to delete the product #<strong>@_productToDelete?.Id @_productToDelete?.Name</strong>?
 		</Body>
 		
 		<Footer>
 			<button type="button" class="btn btn-danger" @onclick="DeleteProduct">
 				Yes
 			</button>
-			<button type="button" class="btn btn-secondary" @onclick="() => ConfirmDeleteModal.Close()">
+			<button type="button" class="btn btn-secondary" @onclick="() => _confirmDeleteModal.Close()">
 				Cancel
 			</button>
 		</Footer>

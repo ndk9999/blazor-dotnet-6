@@ -14,6 +14,7 @@ public static class ServiceInjector
 			options.UseSqlServer(connectionString));
 
 		services.AddScoped<IProductRepository, ProductRepository>();
+		services.AddScoped<IAccountRepository, AccountRepository>();
 		
 		return services;
 	}
@@ -21,6 +22,7 @@ public static class ServiceInjector
 	public static IServiceCollection AddBusinessServices(this IServiceCollection services)
 	{
 		services.AddScoped<IProductService, ProductService>();
+		services.AddScoped<IAuthService, AuthService>();
 		return services;
 	}
 }

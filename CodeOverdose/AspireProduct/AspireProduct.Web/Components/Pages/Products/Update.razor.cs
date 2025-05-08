@@ -15,10 +15,10 @@ public partial class Update : ComponentBase
 
 	[Parameter] public int Id { get; set; }
 
-	public string ErrorMessage { get; set; }
-
 	[SupplyParameterFromForm] 
 	public Product ProductModel { get; set; } = new Product();
+
+	private string _errorMessage;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -49,7 +49,7 @@ public partial class Update : ComponentBase
 		else
 		{
 			ToastService.ShowError(apiResponse.ErrorMessage);
-			ErrorMessage = apiResponse.ErrorMessage;
+			_errorMessage = apiResponse.ErrorMessage;
 		}
 	}
 }

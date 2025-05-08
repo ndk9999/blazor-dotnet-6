@@ -1,10 +1,12 @@
 ﻿using AspireProduct.BLL.Services;
 using AspireProduct.Core.Dtos;
 using AspireProduct.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspireProduct.ApiService.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController(IProductService productService) : ControllerBase

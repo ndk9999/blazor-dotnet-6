@@ -12,13 +12,13 @@ public partial class Index
 
 	[Inject] public IToastService ToastService { get; set; }
 
-	public IList<Product> Products { get; set; }
+	private IList<Product> _products;
 
-	public string ErrorMessage { get; set; }
+	private string _errorMessage;
 
-	public Product ProductToDelete { get; set; }
+	private Product _productToDelete;
 
-	public ModalDialog ConfirmDeleteModal { get; set; }
+	private ModalDialog _confirmDeleteModal;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -31,24 +31,24 @@ public partial class Index
 		var apiResponse = await ApiClient.GetAsync<IList<Product>>("/api/products");
 		if (apiResponse.Success)
 		{
-			Products = apiResponse.Data;
-			ErrorMessage = null;
+			_products = apiResponse.Data;
+			_errorMessage = null;
 		}
 		else
 		{
-			ErrorMessage = apiResponse.ErrorMessage;
+			_errorMessage = apiResponse.ErrorMessage;
 		}
 	}
 
 	protected void ShowDeleteConfirmation(Product product)
 	{
-		ProductToDelete = product;
-		ConfirmDeleteModal.Open();
+		_productToDelete = product;
+		_confirmDeleteModal.Open();
 	}
 
 	protected async Task DeleteProduct()
 	{
-		var apiResponse = await ApiClient.DeleteAsync<Product>($"/api/products/{ProductToDelete.Id}");
+		var apiResponse = await ApiClient.DeleteAsync<Product>($"/api/products/{_productToDelete.Id}");
 
 		if (apiResponse.Success)
 		{
@@ -60,6 +60,6 @@ public partial class Index
 			ToastService.ShowError(apiResponse.ErrorMessage);
 		}
 
-		ConfirmDeleteModal.Close();
+		_confirmDeleteModal.Close();
 	}
 }
