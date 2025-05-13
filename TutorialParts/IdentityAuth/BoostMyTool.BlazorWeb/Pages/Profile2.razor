@@ -1,0 +1,41 @@
+﻿@page "/profile2"
+@*@attribute [Authorize]*@
+@inject HttpClient httpClient
+
+<h3>User Profile</h3>
+
+@if (userProfile == null)
+{
+	<div class="alert alert-danger" role="alert">
+		@errorMessage
+	</div>
+}
+else
+{
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">User Information</h5>
+			<p class="card-text">Name: @userProfile.Name</p>
+			<p class="card-text">Email: @userProfile.Email</p>
+			<p class="card-text">Phone: @userProfile.PhoneNumber</p>
+		</div>
+	</div>	
+}
+
+@code {
+	private UserProfileModel userProfile = null;
+	private string errorMessage = "";
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			errorMessage = "Loading user profile ...";
+			userProfile = await httpClient.GetFromJsonAsync<UserProfileModel>("api/account/profile");
+		}
+		catch (Exception e)
+		{
+			errorMessage = "Cannot read user profile. " + e.Message;
+		}
+	}
+}

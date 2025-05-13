@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoostMyTool.WebApi", "BoostMyTool.WebApi\BoostMyTool.WebApi.csproj", "{747A87B6-1B6E-4272-8243-19E1A1AB3401}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoostMyTool.BlazorWeb", "BoostMyTool.BlazorWeb\BoostMyTool.BlazorWeb.csproj", "{DCA0C85D-132A-41A3-948F-EA747B95F406}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{747A87B6-1B6E-4272-8243-19E1A1AB3401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{747A87B6-1B6E-4272-8243-19E1A1AB3401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{747A87B6-1B6E-4272-8243-19E1A1AB3401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{747A87B6-1B6E-4272-8243-19E1A1AB3401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA0C85D-132A-41A3-948F-EA747B95F406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA0C85D-132A-41A3-948F-EA747B95F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA0C85D-132A-41A3-948F-EA747B95F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA0C85D-132A-41A3-948F-EA747B95F406}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07BAC72A-E293-467C-80EE-BAAB4A3CF110}
+	EndGlobalSection
+EndGlobal

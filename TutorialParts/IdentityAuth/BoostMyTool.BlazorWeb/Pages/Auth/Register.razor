@@ -1,0 +1,91 @@
+﻿@page "/register"
+
+@inject AuthenticationStateProvider authProvider
+@inject NavigationManager navManager
+
+<div class="mx-auto rounded border p-4" style="width: 400px; margin: 60px;">
+	<h3 class="text-center mb-3">Register</h3>
+
+	<hr />
+
+	@if (errorMessages is { Count: > 0 })
+	{
+		<div class="alert alert-danger" role="alert">
+			<ul>
+				@foreach (var msg in errorMessages)
+				{
+					<li>@msg</li>
+				}
+			</ul>
+		</div>
+	}
+
+	<div class="mb-3">
+		<label class="form-label">Email</label>
+		<input type="email" class="form-control" @bind="email" />
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Password</label>
+		<input type="password" class="form-control" @bind="password" />
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Confirm Password</label>
+		<input type="password" class="form-control" @bind="confirmPassword" />
+	</div>
+
+	<div class="row">
+		<div class="col d-grid">
+			<button type="submit" class="btn btn-primary" @onclick="CreateNewUser">Register</button>
+		</div>
+
+		<div class="col d-grid">
+			<a href="/" class="btn btn-outline-primary" role="button">
+				Cancel
+			</a>
+		</div>
+	</div>
+</div>
+
+@code {
+	private string email = string.Empty;
+	private string password = string.Empty;
+	private string confirmPassword = string.Empty;
+
+	private List<string> errorMessages = null;
+
+
+	private async Task CreateNewUser()
+	{
+		errorMessages = null;
+
+		if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+		{
+			errorMessages = ["Email and password are required."];
+			return;
+		}
+
+		if (password != confirmPassword)
+		{
+			errorMessages = ["Password and confirm password are not matched."];
+			return;
+		}
+
+		var provider = authProvider as CustomAuthStateProvider;
+		var result = await provider.RegisterAsync(new RegisterModel()
+		{
+			Email = email,
+			Password = password
+		});
+
+		if (result.Success)
+		{
+			navManager.NavigateTo("/");
+		}
+		else
+		{
+			errorMessages = result.Errors;
+		}
+	}
+}
