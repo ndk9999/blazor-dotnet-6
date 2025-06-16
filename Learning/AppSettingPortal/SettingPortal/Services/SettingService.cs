@@ -81,7 +81,7 @@ public class SettingService(AppDbContext dbContext) : ISettingService
 
 		return environment?.ToLower() switch
 		{
-			"testing" or "t" => setting.StagingValue,
+			"testing" or "t" => setting.TestingValue,
 			"staging" or "s" => setting.StagingValue,
 			"production" or "p" => setting.ProductionValue,
 			_ => setting.DevelopmentValue
