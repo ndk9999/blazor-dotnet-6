@@ -1,0 +1,29 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using SettingPortal.Models
+
+@inject UserManager<AppUser> UserManager
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<ul>
+	@foreach (var user in _users)
+	{
+		<li>@user.UserName : @user.Email</li>
+	}
+</ul>
+
+@code
+{
+	private IList<AppUser> _users;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_users = await UserManager.Users.ToListAsync();
+	}
+}

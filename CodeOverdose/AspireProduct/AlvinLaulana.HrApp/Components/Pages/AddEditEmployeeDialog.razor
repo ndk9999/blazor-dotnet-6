@@ -1,0 +1,102 @@
+﻿@using AlvinLaulana.HrApp.Models.Constants
+@inject ISnackbar Snackbar
+@inject IEmployeeService EmployeeService
+
+
+<EditForm Model="@EmployeeModel"
+          OnValidSubmit="CreateEmployee">
+	<MudDialog>
+		<DialogContent>
+			<DataAnnotationsValidator></DataAnnotationsValidator>
+			<MudGrid Class="mb-5">
+				<MudItem xs="9">
+					<MudTextField Variant="Variant.Outlined"
+					              ShrinkLabel
+								  Label="Full Name"
+					              @bind-Value="EmployeeModel.FullName"
+					              For="() => EmployeeModel.FullName">
+					</MudTextField>
+				</MudItem>
+			
+				<MudItem xs="3">
+					<MudTextField Variant="Variant.Outlined"
+					              ShrinkLabel="true"
+								  Label="Age"
+					              @bind-Value="EmployeeModel.Age"
+					              For="() => EmployeeModel.Age">
+					</MudTextField>
+				</MudItem>
+			</MudGrid>
+
+			<MudDatePicker Class="mb-5"
+						   Variant="Variant.Outlined"
+						   Label="Date Of Birth"
+			               @bind-Date="Dob">
+
+			</MudDatePicker>
+
+			<MudTextField Class="mb-5"
+			              Variant="Variant.Outlined"
+			              ShrinkLabel="true"
+						  Label="Department"
+			              @bind-Value="EmployeeModel.Department"
+			              For="() => EmployeeModel.Department">
+			</MudTextField>
+
+			<MudTextField Class="mb-5"
+			              Variant="Variant.Outlined"
+			              ShrinkLabel="true"
+						  Label="Phone Number"
+			              @bind-Value="EmployeeModel.PhoneNumber"
+			              For="() => EmployeeModel.PhoneNumber">
+			</MudTextField>
+		</DialogContent>
+		
+		<DialogActions>
+			<MudButton OnClick="CloseDialog">Cancel</MudButton>
+			<MudButton ButtonType="ButtonType.Submit"
+					   Color="Color.Primary"
+					   Variant="Variant.Filled">
+				@(EmployeeModel.Id == 0 ? "Create" : "Update")
+			</MudButton>
+		</DialogActions>
+	</MudDialog>
+</EditForm>
+
+@code {
+	[Parameter] public UserAction Action { get; set; } = UserAction.Insert;
+
+	[Parameter] public DateTime? Dob { get; set; } = DateTime.Today;
+
+	[Parameter] public EmployeeViewModel EmployeeModel { get; set; } = new();
+
+	[CascadingParameter] private IMudDialogInstance MudDialog { get; set; }
+
+
+	private async Task CreateEmployee()
+	{
+		if (Dob is not null)
+		{
+			EmployeeModel.DateOfBirth = Dob.Value;
+		}
+
+		var success = EmployeeModel.Id == 0 || Action == UserAction.Insert
+			? await EmployeeService.AddEmployeeAsync(EmployeeModel)
+			: await EmployeeService.UpdateEmployeeAsync(EmployeeModel);
+
+		if (success)
+		{
+			Snackbar.Add("Employee saved successfully", Severity.Success);
+			MudDialog.Close();
+		}
+		else
+		{
+			Snackbar.Add("Cannot save employee information", Severity.Error);
+		}
+	}
+
+	private void CloseDialog()
+	{
+		MudDialog.Close();
+	}
+}
