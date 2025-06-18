@@ -21,7 +21,6 @@ public class ApiConfigurationClient : IApiConfigurationClient, IDisposable
 	internal ApiConfigurationClient(string apiEndpoint)
 	{
 		_apiEndpoint = apiEndpoint ?? throw new ArgumentNullException(nameof(apiEndpoint));
-
 		InitializeClient();
 	}
 

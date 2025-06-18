@@ -5,11 +5,12 @@ namespace SettingConsumer.Extensions;
 
 public static class ConfigurationExtensions
 {
-	public static IConfigurationBuilder AddApiConfiguration(
+	public static IConfigurationBuilder AddAppSettingsFromApi(
 		this IConfigurationBuilder builder,
 		string apiEndpoint,
 		string settingName = "appsettings",
-		string environment = "Development")
+		string environment = null,
+		Action<ApiLoadExceptionContext> exceptionHandler = null)
 	{
 		if (string.IsNullOrWhiteSpace(environment))
 		{
@@ -24,7 +25,8 @@ public static class ConfigurationExtensions
 		{
 			ApiEndpoint = apiEndpoint,
 			Environment = environment,
-			SettingName = settingName
+			SettingName = settingName,
+			OnException = exceptionHandler
 		};
 
 		builder.Add(source);
@@ -32,10 +34,19 @@ public static class ConfigurationExtensions
 		return builder;
 	}
 
-	public static IConfigurationBuilder AddApiConfiguration(
+	public static IConfigurationBuilder AddAppSettingsFromApi(
 		this IConfigurationBuilder builder, Action<ApiConfigurationSource> configureSource)
 	{
-		var source = new ApiConfigurationSource();
+		var source = new ApiConfigurationSource()
+		{
+			SettingName = "appsettings",
+#if DEBUG
+			Environment = "Development"
+#else
+			Environment = "Production"
+#endif
+		};
+
 		configureSource(source);
 		builder.Add(source);
 

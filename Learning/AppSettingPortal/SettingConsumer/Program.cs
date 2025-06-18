@@ -6,7 +6,7 @@ var configuration = new ConfigurationBuilder()
 #if DEBUG
 	.AddJsonFile("appsettings.Development.json", true, false)
 #endif
-	.AddApiConfiguration("https://localhost:7013/api/settings")
+	.AddAppSettingsFromApi("https://localhost:7013/api/settings")
 	.Build();
 
 // See https://aka.ms/new-console-template for more information

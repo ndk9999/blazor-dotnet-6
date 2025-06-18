@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace SettingConsumer.Providers;
 
-public class JsonConfigurationParser
+internal class JsonConfigurationParser
 {
 	private JsonConfigurationParser() { }
 
